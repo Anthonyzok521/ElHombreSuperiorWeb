@@ -10,10 +10,11 @@ export const Recaptcha: React.FC = () => {
   const captchaRef = useRef<ReCAPTCHA>(null);
 
   const handleSubmit = async () => {
-    if(!captchaRef.current) return;
-    
-    const token = captchaRef.current?.getValue();
+
+    /* const token = captchaRef.current?.getValue();
     captchaRef.current?.reset();
+
+    if(!captchaRef.current) return;
 
     await fetch(recaptcha_host + "/verify", {
       method: "POST",
@@ -22,20 +23,21 @@ export const Recaptcha: React.FC = () => {
       },
       body: JSON.stringify({ token }),
     })
-      .then((respose) => respose.json())
+      .then((response) => response.json())
       .then((data) => {
-        if (data.message === "Human 👨 👩") {
+        if (data.message === "Human 👨 👩") { */
           const main = document.querySelector("#container") as HTMLElement;
           ReactDOM.createPortal(<ContainerCards />, main);
           const form = document.querySelector("#recaptcha") as HTMLElement;
           form.remove();
-          return;
-        }
+          console.log("XD")
+          //return;
+       /*  }
         alert("Robot 🤖");
       })
       .catch((error) => {
         console.log(error);
-      });
+      }); */
   };
   return (
     <form
@@ -43,12 +45,11 @@ export const Recaptcha: React.FC = () => {
       className="w-full flex justify-center gap-10 flex-col"
     >
       <div className="w-full">
-        <ReCAPTCHA sitekey={sitekey} ref={captchaRef} />
+        <ReCAPTCHA sitekey={sitekey} ref={captchaRef} onChange={handleSubmit}/>
       </div>
       <div className="w-full flex justify-center">
         <button
-          className="p-2 bg-amber-300 rounded-md text-black font-bebas hover:bg-amber-400 active:bg-amber-500 transition-all"
-          onClick={handleSubmit}
+          className="p-2 bg-amber-300 rounded-md text-black font-bebas hover:bg-amber-400 active:bg-amber-500 transition-all"          
         >
           Ver links
         </button>
