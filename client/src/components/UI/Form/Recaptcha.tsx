@@ -14,7 +14,7 @@ export const Recaptcha: React.FC = () => {
     const token = captchaRef.current?.getValue();
     captchaRef.current?.reset();
 
-    await fetch(recaptcha_host + "/post", {
+    await fetch(recaptcha_host + "/verify", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -34,7 +34,7 @@ export const Recaptcha: React.FC = () => {
       });
   };
   return (
-    <form id="recaptcha" action="/verify" onSubmit={handleSubmit} className="w-full flex justify-center gap-10 flex-col">
+    <form id="recaptcha" onSubmit={handleSubmit} className="w-full flex justify-center gap-10 flex-col">
       <div className="w-full">
         <ReCAPTCHA sitekey={sitekey} ref={captchaRef} />
       </div>
