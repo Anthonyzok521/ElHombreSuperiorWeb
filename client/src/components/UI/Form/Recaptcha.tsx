@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 import { ContainerCards } from "../../Cards/ContainerCards";
 
-const recaptcha_host = import.meta.env.VITE_RECAPTCHA_HOST;
+//const recaptcha_host = import.meta.env.VITE_RECAPTCHA_HOST;
 const sitekey = import.meta.env.VITE_RECAPTCHA_SY;
 
 export const Recaptcha: React.FC = () => {
