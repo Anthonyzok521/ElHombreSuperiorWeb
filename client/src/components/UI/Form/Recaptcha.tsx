@@ -1,11 +1,10 @@
-import React, { useRef} from "react";
+import React, { useRef } from "react";
 import ReactDOM from "react-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 import { ContainerCards } from "../../Cards/ContainerCards";
 
 const recaptcha_host = import.meta.env.VITE_RECAPTCHA_HOST;
-
-
+const sitekey = import.meta.env.VITE_RECAPTCHA_SY;
 
 export const Recaptcha: React.FC = () => {
   const captchaRef = useRef<ReCAPTCHA>(null);
@@ -27,20 +26,27 @@ export const Recaptcha: React.FC = () => {
         console.log(data);
         const main = document.querySelector("#container") as HTMLElement;
         ReactDOM.createPortal(<ContainerCards />, main);
+        const form = document.querySelector("#recaptcha") as HTMLElement;
+        form.remove();
       })
       .catch((error) => {
         console.log(error);
       });
   };
   return (
-    <form action="/verify" onSubmit={handleSubmit}>
-      <label htmlFor="name">Name</label>
-      <input type="text" id="name" className="input" />
-      <ReCAPTCHA
-        sitekey={import.meta.env.REACT_APP_SITE_KEY}
-        ref={captchaRef}
-      />
-      <button type="submit">Ver links</button>
+    <form id="recaptcha" action="/verify" onSubmit={handleSubmit} className="w-full flex justify-center gap-10 flex-col">
+      <div className="w-full">
+        <ReCAPTCHA sitekey={sitekey} ref={captchaRef} />
+      </div>
+      <div className="w-full flex justify-center">
+      <button
+        type="submit"
+        className="p-2 bg-amber-300 rounded-md text-black font-bebas"
+      >
+        Ver links
+      </button>
+      </div>
+      
     </form>
   );
 };
