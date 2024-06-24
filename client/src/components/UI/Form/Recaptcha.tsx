@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 import { ContainerCards } from "../../Cards/ContainerCards";
@@ -7,52 +7,37 @@ import { ContainerCards } from "../../Cards/ContainerCards";
 const sitekey = import.meta.env.VITE_RECAPTCHA_SY;
 
 export const Recaptcha: React.FC = () => {
-  const captchaRef = useRef<ReCAPTCHA>(null);
+  const captchaRef = React.createRef<ReCAPTCHA>();
+  const [robot, setRobot] = useState<boolean>(true);
 
-  const handleSubmit = async () => {
+  const isRobot = () => {
+    setRobot(false);
+  };
 
-    /* const token = captchaRef.current?.getValue();
-    captchaRef.current?.reset();
+  const handleClick = async () => {
+    if(!robot){    
+      const main = document.querySelector("#container") as HTMLElement;
+      ReactDOM.render(<ContainerCards />, main);
+      const form = document.querySelector("#recaptcha") as HTMLElement;
+      form.remove();
+    }
 
-    if(!captchaRef.current) return;
-
-    await fetch(recaptcha_host + "/verify", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ token }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.message === "Human 👨 👩") { */
-          const main = document.querySelector("#container") as HTMLElement;
-          ReactDOM.createPortal(<ContainerCards />, main);
-          const form = document.querySelector("#recaptcha") as HTMLElement;
-          form.remove();
-          console.log("XD")
-          //return;
-       /*  }
-        alert("Robot 🤖");
-      })
-      .catch((error) => {
-        console.log(error);
-      }); */
+    alert("Por favor, confirma que no eres un robot");
   };
   return (
-    <form
-      id="recaptcha"      
-      className="w-full flex justify-center gap-10 flex-col"
-    >
+    <form id="recaptcha" className="w-full flex justify-center gap-10 flex-col">
       <div className="w-full">
-        <ReCAPTCHA sitekey={sitekey} ref={captchaRef} onChange={handleSubmit}/>
+        <h1 className="text-3xl font-bebas text-center">Completa el reCaptcha</h1>
+        <ReCAPTCHA sitekey={sitekey} ref={captchaRef} onChange={isRobot} />
       </div>
       <div className="w-full flex justify-center">
-        <button
-          className="p-2 bg-amber-300 rounded-md text-black font-bebas hover:bg-amber-400 active:bg-amber-500 transition-all"          
-        >
-          Ver links
-        </button>
+        {robot ? (
+          <></>
+        ) : (
+          <button onClick={handleClick} className="p-2 bg-amber-300 rounded-md text-black font-bebas hover:bg-amber-400 active:bg-amber-500 transition-all">
+            Ver links
+          </button>
+        )}
       </div>
     </form>
   );
