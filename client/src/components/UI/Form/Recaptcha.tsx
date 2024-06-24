@@ -47,7 +47,6 @@ export const Recaptcha: React.FC = () => {
       </div>
       <div className="w-full flex justify-center">
         <button
-          type="submit"
           className="p-2 bg-amber-300 rounded-md text-black font-bebas"
         >
           Ver links
