@@ -1,10 +1,10 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import cors from "cors";
+import axios from "axios";
 
 const router = express.Router();
 const app = express();
-const cors = require("cors");
-const axios = require("axios");
 const port = process.env.PORT || 3000;
 
 dotenv.config();
