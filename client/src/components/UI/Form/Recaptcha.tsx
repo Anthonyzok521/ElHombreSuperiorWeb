@@ -9,8 +9,9 @@ const sitekey = import.meta.env.VITE_RECAPTCHA_SY;
 export const Recaptcha: React.FC = () => {
   const captchaRef = useRef<ReCAPTCHA>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+    if(!captchaRef.current) return;
+    
     const token = captchaRef.current?.getValue();
     captchaRef.current?.reset();
 
@@ -38,8 +39,7 @@ export const Recaptcha: React.FC = () => {
   };
   return (
     <form
-      id="recaptcha"
-      onSubmit={handleSubmit}
+      id="recaptcha"      
       className="w-full flex justify-center gap-10 flex-col"
     >
       <div className="w-full">
@@ -47,7 +47,8 @@ export const Recaptcha: React.FC = () => {
       </div>
       <div className="w-full flex justify-center">
         <button
-          className="p-2 bg-amber-300 rounded-md text-black font-bebas"
+          className="p-2 bg-amber-300 rounded-md text-black font-bebas hover:bg-amber-400 active:bg-amber-500 transition-all"
+          onClick={handleSubmit}
         >
           Ver links
         </button>
