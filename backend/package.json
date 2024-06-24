@@ -1,0 +1,39 @@
+{
+  "name": "api-recaptcha",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "This is a API for ElHombreSuperior Web",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anthonyzok521/ElHombreSuperiorWeb.git"
+  },
+  "keywords": [
+    "El",
+    "Hombre",
+    "Superior",
+    "hombre",
+    "superior",
+    "el",
+    "hombre",
+    "el",
+    "hombre",
+    "superior",
+    "el",
+    "hombre",
+    "superior",
+    "web"
+  ],
+  "author": "AC GAMES © 2020-2024",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Anthonyzok521/ElHombreSuperiorWeb/issues"
+  },
+  "homepage": "https://github.com/Anthonyzok521/ElHombreSuperiorWeb#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
