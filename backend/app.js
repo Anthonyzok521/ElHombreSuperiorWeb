@@ -33,9 +33,9 @@ router.post("/verify", async (req, res) => {
 
     // Check response status and send back to the client-side
     if (response.data.success) {
-      res.send("Human 👨 👩");
+      res.json({message: "Human 👨 👩"});
     } else {
-      res.send("Robot 🤖");
+      res.json({message: "Robot 🤖"});
     }
   } catch (error) {
     // Handle any errors that occur during the reCAPTCHA verification process
