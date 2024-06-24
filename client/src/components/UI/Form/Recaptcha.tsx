@@ -23,30 +23,36 @@ export const Recaptcha: React.FC = () => {
     })
       .then((respose) => respose.json())
       .then((data) => {
-        console.log(data);
-        const main = document.querySelector("#container") as HTMLElement;
-        ReactDOM.createPortal(<ContainerCards />, main);
-        const form = document.querySelector("#recaptcha") as HTMLElement;
-        form.remove();
+        if (data.message === "Human 👨 👩") {
+          const main = document.querySelector("#container") as HTMLElement;
+          ReactDOM.createPortal(<ContainerCards />, main);
+          const form = document.querySelector("#recaptcha") as HTMLElement;
+          form.remove();
+          return;
+        }
+        alert("Robot 🤖");
       })
       .catch((error) => {
         console.log(error);
       });
   };
   return (
-    <form id="recaptcha" onSubmit={handleSubmit} className="w-full flex justify-center gap-10 flex-col">
+    <form
+      id="recaptcha"
+      onSubmit={handleSubmit}
+      className="w-full flex justify-center gap-10 flex-col"
+    >
       <div className="w-full">
         <ReCAPTCHA sitekey={sitekey} ref={captchaRef} />
       </div>
       <div className="w-full flex justify-center">
-      <button
-        type="submit"
-        className="p-2 bg-amber-300 rounded-md text-black font-bebas"
-      >
-        Ver links
-      </button>
+        <button
+          type="submit"
+          className="p-2 bg-amber-300 rounded-md text-black font-bebas"
+        >
+          Ver links
+        </button>
       </div>
-      
     </form>
   );
 };
