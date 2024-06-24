@@ -1,10 +1,13 @@
-import express from 'express'
-import("dotenv").config();
+import express from 'express';
+import dotenv from 'dotenv';
+
 const router = express.Router();
 const app = express();
 const cors = require("cors");
 const axios = require("axios");
 const port = process.env.PORT || 3000;
+
+dotenv.config();
 
 //enabling cors
 app.use(cors());
